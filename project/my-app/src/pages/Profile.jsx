@@ -7,6 +7,7 @@ import Blogcard from "../components/Blogcard";
 import useAlertStore from "../store/alertStore";
 
 function Profile() {
+  const API = import.meta.env.VITE_API_URL;
   const { message, showAlert, hideAlert } = useAlertStore();
   const { isOpen } = useStore();
 
@@ -24,7 +25,7 @@ function Profile() {
     const fetchUser = async () => {
       try {
         const userFound = await axios.get(
-          `http://localhost:3000/api/user/${username}`,
+          `${API}/user/${username}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +50,7 @@ function Profile() {
       if (!user.id) return; // only fetch when user is set
       try {
         const blogsfound = await axios.get(
-          `http://localhost:3000/api/blog/user/${user.id}`,
+          `${API}/blog/user/${user.id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

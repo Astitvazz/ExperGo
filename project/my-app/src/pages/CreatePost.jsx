@@ -9,6 +9,7 @@ import useStore from "../store/useStore";
 import CustomAlert from '../components/CustomAlert';
 import { useNavigate } from "react-router-dom";
 function Createpost() {
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [errorModal, setErrorModal] = useState(false);
   const { isOpen } = useStore();
@@ -99,7 +100,7 @@ function Createpost() {
       formData.append("images", file);
     });
 
-    const response = await axios.post("http://localhost:3000/api/blog", formData, {
+    const response = await axios.post(`${API}/blog`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,

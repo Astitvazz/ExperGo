@@ -14,7 +14,7 @@ import Login from './Login';
 import RegistrationForm from './RegistrationForm';
 import CreatePost from './CreatePost';
 import Profile from './Profile';
-import FullBlog from './fullBlog';
+import FullBlog from './FullBlog';
 import CommentCard from '../components/CommentCard';
 
 

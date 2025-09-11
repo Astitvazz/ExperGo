@@ -11,6 +11,7 @@ import { BiSolidUpvote } from "react-icons/bi";
 import Avtar from "./Avtar";
 
 function Blogcard({ blog }) {
+  const API = import.meta.env.VITE_API_URL;
   const [isDraft, setIsDraft] = useState(blog.draft);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -38,7 +39,7 @@ function Blogcard({ blog }) {
       return;
     }
     try {
-      const response = await axios.patch(`http://localhost:3000/api/blog/like/${blog._id}`, { liked },
+      const response = await axios.patch(`${API}/blog/like/${blog._id}`, { liked },
         {
           headers:
           {
@@ -59,7 +60,7 @@ function Blogcard({ blog }) {
     }
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/blog/toggle-status/${blog._id}`,
+        `${API}/blog/toggle-status/${blog._id}`,
         {},
         {
           headers: {

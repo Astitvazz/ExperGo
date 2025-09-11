@@ -5,6 +5,7 @@ import useStore from '../store/useStore';
 import Loader from '../components/Loader';
 
 function Blogholder() {
+  const API = import.meta.env.VITE_API_URL;
   const { isOpen } = useStore();
   const [blogarray, setBlogarray] = useState([]);
   const [loading, setLoading] = useState(true); // ✅ new state
@@ -12,7 +13,7 @@ function Blogholder() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/blog?draft=false");
+        const response = await axios.get(`${API}/blog?draft=false`);
         setBlogarray(response.data);
       } catch (error) {
         console.log('error fetching the blogs', error);

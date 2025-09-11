@@ -11,6 +11,7 @@ import useStore from '../store/useStore';
 import useAuthStore from "../store/useAuthStore";
 
 function Navbar() {
+  const API = import.meta.env.VITE_API_URL;
   const { toggleModal } = useStore();
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
@@ -25,7 +26,7 @@ function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user/me', {
+        const response = await axios.get(`${API}/user/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }

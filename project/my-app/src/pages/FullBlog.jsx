@@ -9,6 +9,7 @@ import CustomAlert from '../components/CustomAlert';
 import Loader from '../components/Loader';
 
 function FullBlog() {
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const { id } = useParams();
   const token = localStorage.getItem('token');
@@ -23,7 +24,7 @@ function FullBlog() {
 
   const onSubmit = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/blog/comment/${id}`, { content }, {
+      await axios.post(`${API}/blog/comment/${id}`, { content }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -39,7 +40,7 @@ function FullBlog() {
   const fetchMyBlog = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/api/blog/${id}`, {
+      const response = await axios.get(`${API}/blog/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

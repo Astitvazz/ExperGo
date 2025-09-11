@@ -5,6 +5,8 @@ import useAuthStore from '../store/useAuthStore';
 import CustomAlert from '../components/CustomAlert';
 
 function Login() {
+  const API = import.meta.env.VITE_API_URL;
+
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuthStore();
@@ -43,7 +45,7 @@ function Login() {
     setError(testObject);
     if (!testObject.usernameError && !testObject.passwordError) {
       try {
-        const response = await axios.post('http://localhost:3000/api/auth/login', formObject)
+        const response = await axios.post(`${API}/auth/login`, formObject)
         const token = response.data.token;
         login(token);
         setShow(true);

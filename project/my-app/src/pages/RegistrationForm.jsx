@@ -5,6 +5,8 @@ import { MdErrorOutline } from "react-icons/md";
 
 
 function RegistrationForm() {
+  const API = import.meta.env.VITE_API_URL;
+
   const [formObject, setFormObject] = useState({
     username: '',
     email: '',
@@ -71,7 +73,7 @@ function RegistrationForm() {
     ) {
       try {
         const response = await axios.post(
-          'http://localhost:3000/api/auth/register',
+          `${API}/auth/register`,
           formObject
         );
         console.log(response.data);
