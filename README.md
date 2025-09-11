@@ -206,4 +206,3 @@ If I had more time, I would:
 
 <img width="1920" height="1080" alt="Screenshot 2025-09-11 205910" src="https://github.com/user-attachments/assets/5f5eb15c-02b8-4b66-ae78-c064550d1c98" />
 
-<img width="1861" height="740" alt="Screenshot 2025-09-03 214957" src="https://github.com/user-attachments/assets/6c70ff41-6fc0-4520-9374-044706f2d2f3" />
