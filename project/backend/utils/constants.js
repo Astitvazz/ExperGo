@@ -26,7 +26,7 @@ const HTTP_STATUS = {
 // Cloudinary settings
 const CLOUDINARY_SETTINGS = {
   FOLDER: 'BubbleBlogUploads',
-  ALLOWED_FORMATS: ['jpg', 'jpeg', 'png'],
+  ALLOWED_FORMATS: ['jpg', 'jpeg', 'png','gif','webp'],
   TRANSFORMATION: [{ width: 800, height: 600, crop: 'limit' }]
 };
 
