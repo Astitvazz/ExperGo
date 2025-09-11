@@ -136,7 +136,7 @@ function Blogcard({ blog }) {
 
       {/* Content */}
       <div className="w-full px-4 pb-4">
-        <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-700 text-sm leading-relaxed">
           {blog.content}
         </p>
       </div>
