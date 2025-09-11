@@ -148,7 +148,7 @@ function Createpost() {
           }}
         />
       )}
-      <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-24 pl-10 pr-5'>
+      <div className="h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-24 pl-10">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Create Post</h1>

@@ -80,7 +80,7 @@ function Blogcard({ blog }) {
   }
 
   return (
-    <div className="w-[400px] sm:w-[500px] md:w-[650px] lg:w-[700px] bg-white flex-col flex 
+    <div className="w-[350px] sm:w-[400px] md:w-[650px] lg:w-[700px] bg-white flex-col flex 
                     items-center justify-start rounded-2xl overflow-hidden lg:mb-4 
                     border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-lg 
                     transition-all duration-300 ease-out hover:-translate-y-1 

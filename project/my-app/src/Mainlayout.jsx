@@ -16,7 +16,7 @@ function Mainlayout() {
            <Sidebar/>
             <Outlet/>
             
-            <ProfileModal/>
+          <ProfileModal/>
         </div>
     </>
   )

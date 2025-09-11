@@ -84,7 +84,7 @@ function Profile() {
         isOpen ? "xl:w-[77%]" : "xl:w-[72%]"
       } flex justify-end items-center transition-all duration-300 ease-in-out`}
     >
-      <div className="h-full w-full max-w-4xl flex-col flex items-center justify-start pt-16 px-4 sm:px-6 lg:px-8">
+      <div className="h-full w-full max-w-4xl flex-col flex items-center justify-start pt-16 px-4 pr-10 sm:px-6 lg:px-8">
         {/* Profile header */}
         <div className="w-full max-w-3xl">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-6">
@@ -218,7 +218,7 @@ function Profile() {
         </div>
 
         {/* Content Area */}
-        <div className="w-full max-w-3xl min-h-96">
+        <div className="w-full max-w-3xl min-h-96 flex justify-center items-center">
           {post ? (
             <>
               {publishedBlogs.length === 0 ? (

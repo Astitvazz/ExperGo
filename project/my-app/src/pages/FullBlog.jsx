@@ -76,8 +76,8 @@ function FullBlog() {
           }}
         />
       )}
-      <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-12 lg:pt-24 pl-10 pr-5'>
-        <div className="w-[400px] sm:w-[500px] md:w-[650px] lg:w-[700px] xl:w-[750px] flex-col flex items-center justify-start p-4 overflow-hidden mb-4 border-b-2 border-gray-200 transition-all duration-300 ease-in-out">
+      <div className="h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-24 pl-10 pr-4 ">
+        <div className="w-[400px] sm:w-[500px] md:w-[650px] lg:w-[700px] xl:w-[750px] flex-col flex items-center justify-start p-6 overflow-hidden mb-4 border-b-2 border-gray-200 transition-all duration-300 ease-in-out pr-12">
           <Blogcard blog={blog} />
           <div className="w-full p-2">
             <h4 className="font-semibold lg:font-semibold lg:text-2xl">Comments</h4>
