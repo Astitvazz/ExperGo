@@ -8,7 +8,7 @@ const { HTTP_STATUS } = require('../utils/constants');
  */
 const addComment = async (req, res) => {
     try {
-        const { content } = req.body;
+        const { content, parentComment } = req.body;
         const blogId = req.params.id;
         const authorId = req.user.id;
 
@@ -16,7 +16,8 @@ const addComment = async (req, res) => {
         const newComment = new Comment({
             content,
             blog: blogId,
-            author: authorId
+            author: authorId,
+            parentComment: parentComment || null
         });
 
         await newComment.save();

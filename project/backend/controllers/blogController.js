@@ -7,12 +7,13 @@ const { HTTP_STATUS } = require('../utils/constants');
  */
 const createBlog = async (req, res) => {
     try {
-        const { title, content, link,draft } = req.body;
+        const { title, content, link, draft, category } = req.body;
         const imageUrls = req.files ? req.files.map(file => file.path) : [];
 
         const newBlog = new Blog({
             title,
             content,
+            category: category || "General",
             link,
             images: imageUrls,
             author: req.user.id,
@@ -83,10 +84,12 @@ const getMyBlogs = async (req, res) => {
 const getBlogById = async (req, res) => {
     try {
         const blogId = req.params.id;
-        const blog = await Blog.findById(blogId).populate({
-            path: 'comments',
-            populate: { path: 'author' }
-        });
+        const blog = await Blog.findById(blogId)
+            .populate('author')
+            .populate({
+                path: 'comments',
+                populate: [{ path: 'author' }, { path: 'parentComment' }]
+            });
 
         if (!blog) {
             return res.status(HTTP_STATUS.NOT_FOUND).json({
@@ -110,7 +113,7 @@ const getBlogById = async (req, res) => {
 const getBlogsByUserId = async (req, res) => {
     try {
         const userId = req.params.userid;
-        const blogs = await Blog.find({ author: userId });
+        const blogs = await Blog.find({ author: userId }).populate('author');
         res.json(blogs);
     } catch (error) {
         res.status(HTTP_STATUS.UNAUTHORIZED).json({
@@ -163,11 +166,88 @@ const toggleLike = async (req, res) => {
     }
 };
 
+/**
+ * Update a blog post owned by current user
+ */
+const updateBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const { title, content, link, category } = req.body;
+        const blog = await Blog.findById(blogId);
+
+        if (!blog) {
+            return res.status(HTTP_STATUS.NOT_FOUND).json({
+                message: "Blog not found"
+            });
+        }
+
+        if (blog.author.toString() !== req.user.id) {
+            return res.status(HTTP_STATUS.FORBIDDEN).json({
+                message: "Not authorized"
+            });
+        }
+
+        blog.title = title ?? blog.title;
+        blog.content = content ?? blog.content;
+        blog.category = category ?? blog.category;
+        blog.link = link ?? blog.link;
+
+        if (req.files?.length) {
+            blog.images = req.files.map((file) => file.path);
+        }
+
+        await blog.save();
+        await blog.populate('author');
+
+        return res.status(HTTP_STATUS.OK).json(blog);
+    } catch (error) {
+        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Could not update blog",
+            error: error.message
+        });
+    }
+};
+
+/**
+ * Delete a blog post owned by current user
+ */
+const deleteBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const blog = await Blog.findById(blogId);
+
+        if (!blog) {
+            return res.status(HTTP_STATUS.NOT_FOUND).json({
+                message: "Blog not found"
+            });
+        }
+
+        if (blog.author.toString() !== req.user.id) {
+            return res.status(HTTP_STATUS.FORBIDDEN).json({
+                message: "Not authorized"
+            });
+        }
+
+        await Blog.findByIdAndDelete(blogId);
+
+        return res.status(HTTP_STATUS.OK).json({
+            message: "Blog deleted successfully"
+        });
+    } catch (error) {
+        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Could not delete blog",
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     createBlog,
     getAllBlogs,
     getMyBlogs,
     getBlogById,
     getBlogsByUserId,
-    toggleLike
+    toggleLike,
+    updateBlog,
+    deleteBlog
 };

@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { checkToken, checkAdmin } = require('../middleware/auth');
+const upload = require('../middleware/upload');
 const {
     getAllUsers,
     getMyProfile,
     getUserByUsername,
-    deleteUser
+    deleteUser,
+    updateMyProfile
 } = require('../controllers/userController');
 
 /**
@@ -18,6 +20,7 @@ router.get('/', checkToken, checkAdmin, getAllUsers);
 
 // GET /api/user/me - Get current user's profile
 router.get('/me', checkToken, getMyProfile);
+router.patch('/me', checkToken, upload.single('avatar'), updateMyProfile);
 
 // GET /api/user/:username - Get user by username
 router.get('/:username', checkToken, getUserByUsername);

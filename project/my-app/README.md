@@ -1,12 +1,22 @@
-# React + Vite
+# BubbleBlog Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This frontend has been refactored from a Vite React app into a Next.js App Router project.
 
-Currently, two official plugins are available:
+## What Changed
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Next.js App Router now handles the feed, auth, profile, create-post, and blog detail routes.
+- The UI shell was redesigned with a stronger editorial look and clearer responsive layout.
+- Client-side auth and lightweight UI state are managed through Zustand stores.
+- The frontend now reads `NEXT_PUBLIC_API_URL` instead of the old Vite env key.
+- Use different ports for frontend and backend. A safe local default is Next.js on `3000` and Express on `3001`.
 
-## Expanding the ESLint configuration
+## Run It
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Install dependencies with `npm install`
+2. Start the app with `npm run dev`
+3. Make sure the backend is running at the URL in `.env`
+
+## Notes
+
+- The old `src/` Vite code is still in the repo as reference while the new Next.js structure settles.
+- The backend route for blog detail was updated to populate the author so the new detail page can render correctly.

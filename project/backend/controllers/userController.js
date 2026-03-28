@@ -91,9 +91,49 @@ const deleteUser = async (req, res) => {
     }
 };
 
+/**
+ * Update current user profile
+ * Allows user to update bio and avatar
+ */
+const updateMyProfile = async (req, res) => {
+    try {
+        const myId = req.user.id;
+        const { bio } = req.body;
+        const updates = {};
+
+        if (typeof bio === 'string') {
+            updates.bio = bio;
+        }
+
+        if (req.file?.path) {
+            updates.avatar = req.file.path;
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            myId,
+            updates,
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(HTTP_STATUS.NOT_FOUND).json({
+                message: "User not found"
+            });
+        }
+
+        return res.status(HTTP_STATUS.OK).json(updatedUser);
+    } catch (error) {
+        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Could not update profile",
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     getAllUsers,
     getMyProfile,
     getUserByUsername,
-    deleteUser
+    deleteUser,
+    updateMyProfile
 };
